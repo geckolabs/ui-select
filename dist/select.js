@@ -1,7 +1,7 @@
 /*!
  * ui-select
  * http://github.com/angular-ui/ui-select
- * Version: 0.19.4 - 2016-10-28T12:25:26.849Z
+ * Version: 0.19.4 - 2016-10-28T12:45:13.148Z
  * License: MIT
  */
 
@@ -1445,8 +1445,11 @@ uis.directive('uiSelectMatch', ['uiSelectConfig', function(uiSelectConfig) {
       attrs.$observe('allowClear', setAllowClear);
       setAllowClear(attrs.allowClear);
 
-      attrs.$observe('clearValue', function() { $select.clearValue = scope.$eval(attrs.clearValue); });
-      $select.clearValue = scope.$eval(attrs.clearValue);
+      function setClearValue(value) {
+        $select.clearValue = (angular.isDefined(value)) ? scope.$eval(value) : null;
+      }
+      attrs.$observe('clearValue', setClearValue);
+      setClearValue(attrs.clearValue);
 
       if($select.multiple){
         $select.sizeSearchInput();
