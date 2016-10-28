@@ -157,6 +157,7 @@ describe('ui-select tests', function() {
       if (attrs.title !== undefined) { attrsHtml += ' title="' + attrs.title + '"'; }
       if (attrs.appendToBody !== undefined) { attrsHtml += ' append-to-body="' + attrs.appendToBody + '"'; }
       if (attrs.allowClear !== undefined) { matchAttrsHtml += ' allow-clear="' + attrs.allowClear + '"';}
+      if (attrs.clearValue !== undefined) { matchAttrsHtml += ' clear-value="' + attrs.clearValue + '"';}
       if (attrs.inputId !== undefined) { attrsHtml += ' input-id="' + attrs.inputId + '"'; }
       if (attrs.ngClass !== undefined) { attrsHtml += ' ng-class="' + attrs.ngClass + '"'; }
       if (attrs.resetSearchInput !== undefined) { attrsHtml += ' reset-search-input="' + attrs.resetSearchInput + '"'; }
@@ -548,6 +549,23 @@ describe('ui-select tests', function() {
     // If there is no selection it the X icon should be gone.
     expect(el.find('.select2-search-choice-close').length).toEqual(0);
 
+  });
+
+  it('should set the value to the evaluation of clear-value if set', function () {
+    scope.selection.selected = scope.people[0];
+
+    var el = createUiSelect({theme : 'select2', allowClear: 'true', clearValue: "'test'"});
+    var $select = el.scope().$select;
+
+    // allowClear should be true.
+    expect($select.allowClear).toEqual(true);
+
+    // clearValue should be 'test'.
+    expect($select.clearValue).toEqual('test');
+
+    // Trigger clear.
+    el.find('.select2-search-choice-close').click();
+    expect(scope.selection.selected).toEqual('test');
   });
 
   it('should toggle allow-clear directive', function() {
