@@ -1,7 +1,7 @@
 /*!
  * ui-select
  * http://github.com/angular-ui/ui-select
- * Version: 0.19.4 - 2016-10-28T14:28:16.263Z
+ * Version: 0.19.4 - 2016-10-28T15:00:48.866Z
  * License: MIT
  */
 
@@ -444,7 +444,10 @@ uis.controller('uiSelectCtrl',
       var groupFn = $scope.$eval(groupByExp);
       ctrl.groups = [];
       angular.forEach(items, function(item) {
-        var groupName = angular.isFunction(groupFn) ? groupFn(item) : item[groupFn];
+        var groupName;
+        if(item) {
+          groupName = angular.isFunction(groupFn) ? groupFn(item) : item[groupFn];
+        }
         var group = ctrl.findGroupByName(groupName);
         if(group) {
           group.items.push(item);

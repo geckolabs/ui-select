@@ -178,7 +178,10 @@ uis.controller('uiSelectCtrl',
       var groupFn = $scope.$eval(groupByExp);
       ctrl.groups = [];
       angular.forEach(items, function(item) {
-        var groupName = angular.isFunction(groupFn) ? groupFn(item) : item[groupFn];
+        var groupName;
+        if(item) {
+          groupName = angular.isFunction(groupFn) ? groupFn(item) : item[groupFn];
+        }
         var group = ctrl.findGroupByName(groupName);
         if(group) {
           group.items.push(item);
