@@ -1,7 +1,7 @@
 /*!
  * ui-select
  * http://github.com/angular-ui/ui-select
- * Version: 0.19.4 - 2016-10-11T15:38:54.074Z
+ * Version: 0.19.4 - 2016-10-28T10:01:16.773Z
  * License: MIT
  */
 
@@ -725,7 +725,7 @@ uis.controller('uiSelectCtrl',
   };
 
   ctrl.clear = function($event) {
-    ctrl.select(undefined);
+    ctrl.select(this.clearValue || null);
     $event.stopPropagation();
     $timeout(function() {
       ctrl.focusser[0].focus();
@@ -1444,6 +1444,9 @@ uis.directive('uiSelectMatch', ['uiSelectConfig', function(uiSelectConfig) {
 
       attrs.$observe('allowClear', setAllowClear);
       setAllowClear(attrs.allowClear);
+
+      attrs.$observe('clearValue', function() { $select.clearValue = scope.$eval(attrs.clearValue); });
+      $select.clearValue = scope.$eval(attrs.clearValue);
 
       if($select.multiple){
         $select.sizeSearchInput();

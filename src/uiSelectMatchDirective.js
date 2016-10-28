@@ -28,6 +28,9 @@ uis.directive('uiSelectMatch', ['uiSelectConfig', function(uiSelectConfig) {
       attrs.$observe('allowClear', setAllowClear);
       setAllowClear(attrs.allowClear);
 
+      attrs.$observe('clearValue', function() { $select.clearValue = scope.$eval(attrs.clearValue); });
+      $select.clearValue = scope.$eval(attrs.clearValue);
+
       if($select.multiple){
         $select.sizeSearchInput();
       }
