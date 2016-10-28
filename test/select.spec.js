@@ -568,6 +568,23 @@ describe('ui-select tests', function() {
     expect(scope.selection.selected).toEqual('test');
   });
 
+  it('should accept undefined as a valid clear-value', function () {
+    scope.selection.selected = scope.people[0];
+
+    var el = createUiSelect({theme : 'select2', allowClear: 'true', clearValue: "undefined"});
+    var $select = el.scope().$select;
+
+    // allowClear should be true.
+    expect($select.allowClear).toEqual(true);
+
+    // clearValue should be 'test'.
+    expect($select.clearValue).toEqual(undefined);
+
+    // Trigger clear.
+    el.find('.select2-search-choice-close').click();
+    expect(scope.selection.selected).toEqual(undefined);
+  });
+
   it('should toggle allow-clear directive', function() {
     scope.selection.selected = scope.people[0];
     scope.isClearAllowed = false;

@@ -1,7 +1,7 @@
 /*!
  * ui-select
  * http://github.com/angular-ui/ui-select
- * Version: 0.19.4 - 2016-10-28T12:45:13.148Z
+ * Version: 0.19.4 - 2016-10-28T14:28:16.263Z
  * License: MIT
  */
 
@@ -725,7 +725,7 @@ uis.controller('uiSelectCtrl',
   };
 
   ctrl.clear = function($event) {
-    ctrl.select(this.clearValue || null);
+    ctrl.select(this.clearValue);
     $event.stopPropagation();
     $timeout(function() {
       ctrl.focusser[0].focus();

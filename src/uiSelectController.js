@@ -459,7 +459,7 @@ uis.controller('uiSelectCtrl',
   };
 
   ctrl.clear = function($event) {
-    ctrl.select(this.clearValue || null);
+    ctrl.select(this.clearValue);
     $event.stopPropagation();
     $timeout(function() {
       ctrl.focusser[0].focus();
